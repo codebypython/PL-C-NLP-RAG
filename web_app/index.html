@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VietLawAssist | Hệ Thống Trợ Lý Pháp Luật AI Chuẩn Doanh Nghiệp</title>
+    <meta name="description" content="Trợ lý pháp luật AI Việt Nam thế hệ mới với Hybrid Search RRF dưới 15ms và cơ chế kiểm định chống ảo giác tuyệt đối.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Top Navbar -->
+        <header class="app-header">
+            <div class="brand-container">
+                <div class="brand-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3v18M3 9l9-6 9 6M6 12l-3 6h6l-3-6zm12 0l-3 6h6l-3-6z"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1 class="brand-title">VIETLAW<span class="highlight">ASSIST</span></h1>
+                    <span class="brand-subtitle">Enterprise Legal AI &bull; Sub-15ms Hybrid RRF</span>
+                </div>
+            </div>
+
+            <!-- Domain Selector Pills -->
+            <div class="domain-pills" id="domain-pills-container">
+                <button class="pill active" data-domain="" id="pill-all">Tất Cả Lĩnh Vực</button>
+                <button class="pill" data-domain="dan_su" id="pill-blds">Dân Sự (BLDS)</button>
+                <button class="pill" data-domain="lao_dong" id="pill-blld">Lao Động (BLLD)</button>
+                <button class="pill" data-domain="doanh_nghiep" id="pill-ldn">Doanh Nghiệp (LDN)</button>
+                <button class="pill" data-domain="hinh_su" id="pill-blhs">Hình Sự (BLHS)</button>
+            </div>
+
+            <div class="header-actions">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text" id="system-status-text">Hệ Thống Sẵn Sàng (0.05ms)</span>
+                </div>
+                <button class="btn-icon" id="btn-toggle-telemetry" title="Xem Bảng Đo Vi Độ Trễ">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                    <span>Telemetry</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Telemetry Drawer / Bar -->
+        <div class="telemetry-bar" id="telemetry-bar">
+            <div class="telemetry-card">
+                <span class="telemetry-label">Hybrid RRF Latency</span>
+                <span class="telemetry-value text-cyan" id="metric-latency">0.05 ms</span>
+            </div>
+            <div class="telemetry-card">
+                <span class="telemetry-label">In-Memory Cache</span>
+                <span class="telemetry-value text-emerald" id="metric-cache">100% Hit</span>
+            </div>
+            <div class="telemetry-card">
+                <span class="telemetry-label">Anti-Hallucination Guardrail</span>
+                <span class="telemetry-value text-gold" id="metric-guardrail">100% Verified</span>
+            </div>
+            <div class="telemetry-card">
+                <span class="telemetry-label">Hardware Acceleration</span>
+                <span class="telemetry-value text-purple" id="metric-hw">RTX 3050 + 12T CPU</span>
+            </div>
+        </div>
+
+        <!-- Main Workspace Container -->
+        <main class="main-workspace">
+            <!-- Left / Center: Chat Console -->
+            <section class="chat-section">
+                <div class="chat-history" id="chat-history">
+                    <!-- Welcome Hero Banner -->
+                    <div class="welcome-card" id="welcome-card">
+                        <div class="welcome-icon">⚖️</div>
+                        <h2>Hệ Thống Trợ Lý Luật Sư AI Trực Tuyến</h2>
+                        <p>Hệ thống tự động tra cứu điều khoản pháp luật, kiểm định tính xác thực nguyên văn và đưa ra lời khuyên pháp lý có căn cứ, cam kết không bịa đặt số hiệu luật.</p>
+                        
+                        <div class="sample-queries-box">
+                            <span class="sample-title">Gợi ý tình huống pháp lý thực tế:</span>
+                            <div class="query-chips">
+                                <button class="query-chip" data-query="Người sử dụng lao động sa thải nhân viên trái luật thì phải bồi thường những gì?">
+                                    💼 Sa thải nhân viên trái luật bồi thường gì?
+                                </button>
+                                <button class="query-chip" data-query="Điều kiện để thành lập công ty trách nhiệm hữu hạn một thành viên?">
+                                    🏢 Thành lập công ty TNHH 1 thành viên
+                                </button>
+                                <button class="query-chip" data-query="Bồi thường thiệt hại do tai nạn xe máy nguồn nguy hiểm cao độ?">
+                                    🛵 Tai nạn xe máy bồi thường ra sao?
+                                </button>
+                                <button class="query-chip" data-query="Thời hiệu truy cứu trách nhiệm hình sự tội lừa đảo chiếm đoạt tài sản?">
+                                    ⚖️ Thời hiệu truy cứu tội lừa đảo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Console -->
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="user-input-query" 
+                            rows="2" 
+                            placeholder="Mô tả tình huống pháp lý hoặc tra cứu số hiệu điều luật (ví dụ: Quyền đơn phương chấm dứt HĐLĐ...)..."
+                            id="input-legal-query"
+                        ></textarea>
+                        <div class="input-toolbar">
+                            <div class="stream-toggle">
+                                <input type="checkbox" id="chk-stream-mode" checked>
+                                <label for="chk-stream-mode">⚡ Realtime Token Streaming (SSE)</label>
+                            </div>
+                            <button id="btn-submit-query" class="btn-primary">
+                                <span>Gửi Yêu Cầu</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right: Evidence & Citations Inspector -->
+            <aside class="evidence-panel" id="evidence-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <h3>Căn Cứ Pháp Lý Đối Soát</h3>
+                    </div>
+                    <span class="evidence-badge" id="evidence-count-badge">0 Căn Cứ</span>
+                </div>
+
+                <div class="evidence-list" id="evidence-list">
+                    <div class="empty-evidence">
+                        <p>Chưa có phiên truy vấn nào. Hãy gửi một câu hỏi để bóc tách điều luật và kiểm tra chéo chống ảo giác.</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
